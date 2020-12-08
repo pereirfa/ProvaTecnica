@@ -16,11 +16,14 @@ namespace CourseSignUP.Controllers
         private readonly ICoursesAppService _CoursesAppService;
         private readonly ILogger _Logger;
 
+        #region public CoursesController(ICoursesAppService _coursesAppService, ILogger<CoursesController> logger)
         public CoursesController(ICoursesAppService _coursesAppService, ILogger<CoursesController> logger)
         {
             _CoursesAppService = _coursesAppService;
             _Logger = logger;
         }
+        #endregion
+
 
         #region public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse(string id)
         /// <summary>
@@ -49,6 +52,8 @@ namespace CourseSignUP.Controllers
 
         }
         #endregion
+
+        
 
         #region public async Task<ActionResult<ResponseDTO<IEnumerable<CreateCourseDto>>>> CreateCourse(string id)
         /// <summary>
@@ -106,8 +111,6 @@ namespace CourseSignUP.Controllers
 
         }
         #endregion
-
-
 
     }
 }

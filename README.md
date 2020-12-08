@@ -12,19 +12,17 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 
 # Swagger 
-|                |                          |
-|----------------|-------------------------------|-----------------------------|
+
 |Swagger |`https://coursesignup.azurewebsites.net/swagger/index.html            |           |
-|
+
 
 # Métodos 
 
-|                |                         |                        |
-|----------------|-------------------------------|-----------------------------|
-|GetCourse|     Consulta dos cursos cadastrados           |            |
-|CreateCourse          |Cadastro dos cursos           |            |
-|CreateLecture          | Cadastro Professores|, |
-|SignUpCorse          | Matriculas Alunos`|
+|---------------- |-------------------------------|-----------------------------|
+|GetCourse        |     Consulta dos cursos cadastrados           |            |
+|CreateCourse     |     Cadastro dos cursos    |            |
+|CreateLecture    |     Cadastro Professores|  |
+|SignUpCorse      |     Matriculas Alunos      |
 
 
 

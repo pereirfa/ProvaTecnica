@@ -33,7 +33,9 @@ namespace WebAppTest
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddScoped<ICoursesAppService,CoursesAppService>();
-            services.AddScoped<ILecturerAppService, LecturerAppService>();
+            services.AddScoped<ILecturerAppService,LecturerAppService>();
+            services.AddScoped<IStatisticsAppService,StatisticsAppService>();
+
             services.AddScoped<ILogger, Logger<CourseDto>>();
 
             services.AddSwaggerGen(c =>
