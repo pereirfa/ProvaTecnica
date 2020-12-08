@@ -15,23 +15,22 @@ namespace CourseSignUP.Repository
         {
             _configuration = configuration;
         }
-        public IEnumerable<CourseDto> Consultar()
+        public IEnumerable<CourseDto> Consultar(string Id)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
             var courses = new List<CourseDto>();
 
-            string queryString =
-              " SELECT Id, Capacity, NumberOfStudents " +
-              " FROM dbo.COURSE " +
-              " ORDER BY Capacity;";
+            string queryString = Id != null ? "SELECT Id, Capacity, NumberOfStudents FROM dbo.COURSE Where Id = @Id " : "SELECT Id, Capacity, NumberOfStudents FROM dbo.COURSE "; 
 
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
-
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
+                    if ( Id != null )
+                      command.Parameters.Add("@Id", SqlDbType.VarChar, 5).Value = Id;
+                    
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
@@ -54,12 +53,12 @@ namespace CourseSignUP.Repository
         }
 
 
-        public bool Incluir(CreateCourseDto curso)
+        public bool Incluir(CourseDto curso)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
             string queryString =
-              "  INSERT INTO dbo.Lecture(LecturerId, Name, Capacity) " +
-                 "VALUES (@LectureId, @Name, @Capacity) ";
+              "  INSERT INTO dbo.Course(Id, NumberOfStudents, Capacity) " +
+                 "VALUES (@Id, @NumberOfStudents, @Capacity) ";
 
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
@@ -67,8 +66,8 @@ namespace CourseSignUP.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@LectureId", SqlDbType.VarChar, 5).Value = curso.LecturerId ;
-                    command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = curso.Name;
+                    command.Parameters.Add("@Id", SqlDbType.VarChar, 5).Value = curso.Id ;
+                    command.Parameters.Add("@NumberOfStudents", SqlDbType.VarChar, 50).Value = curso.NumberOfStudents;
                     command.Parameters.Add("@Capacity", SqlDbType.Int, 5).Value = curso.Capacity;
                     connection.Open();
                     command.ExecuteNonQuery();

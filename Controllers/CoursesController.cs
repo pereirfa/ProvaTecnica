@@ -31,12 +31,12 @@ namespace CourseSignUP.Controllers
         /// </summary>
         /// <returns>course</returns>
         [HttpGet, Route("GetCourse")]
-        public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse()
+        public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse(string Id)
         {
             var retorno = new ResponseDTO<IEnumerable<CourseDto>>();
             try
             {
-                retorno.Data = await Task.Run(() => _CoursesAppService.GetCourse());
+                retorno.Data = await Task.Run(() => _CoursesAppService.GetCourse(Id));
                 retorno.Status = retorno.Data != null;
                 retorno.Message = retorno.Status ? "OK" : "Não retornou dados";
                 retorno.ExceptionMessage = null;
@@ -53,22 +53,21 @@ namespace CourseSignUP.Controllers
         }
         #endregion
 
-        
 
-        #region public async Task<ActionResult<ResponseDTO<IEnumerable<CreateCourseDto>>>> CreateCourse(string id)
+        #region public async Task<ActionResult<ResponseDTO<string>>> CreateCourse(CourseDto course)
         /// <summary>
         ///  Incluir Palestra
         /// </summary>
         /// <returns>course</returns>
         [HttpPost, Route("CreateCourse")]
-        public async Task<ActionResult<ResponseDTO<bool>>> CreateCourse(CreateCourseDto course)
+        public async Task<ActionResult<ResponseDTO<string>>> CreateCourse(CourseDto course)
         {
-            var retorno = new ResponseDTO<bool>();
+            var retorno = new ResponseDTO<string>();
             try
             {
                 retorno.Data = await Task.Run(() => _CoursesAppService.CreateCourse(course));
-                retorno.Status = retorno.Data != false;
-                retorno.Message = retorno.Status ? "OK" : "Não retornou dados";
+                retorno.Status = true;
+                retorno.Message = retorno.Data;
                 retorno.ExceptionMessage = null;
                 return Ok(retorno);
             }
@@ -84,20 +83,20 @@ namespace CourseSignUP.Controllers
         #endregion
 
 
-        #region public async Task<ActionResult<ResponseDTO<IEnumerable<CreateCourseDto>>>> SignUPCourse(string id)
+        #region  public async Task<ActionResult<ResponseDTO<string>>> SignUPCourse(SignUpToCourseDto matricula)
         /// <summary>
         ///  Incluir Palestra
         /// </summary>
         /// <returns>course</returns>
         [HttpPost, Route("SignUPCourse")]
-        public async Task<ActionResult<ResponseDTO<bool>>> SignUPCourse(SignUpToCourseDto matricula)
+        public async Task<ActionResult<ResponseDTO<string>>> SignUPCourse(SignUpToCourseDto matricula)
         {
-            var retorno = new ResponseDTO<bool>();
+            var retorno = new ResponseDTO<string>();
             try
             {
                 retorno.Data = await Task.Run(() => _CoursesAppService.SignUPCourse(matricula));
-                retorno.Status = retorno.Data != false;
-                retorno.Message = retorno.Status ? "OK" : "Não retornou dados";
+                retorno.Status = true ;
+                retorno.Message = retorno.Data ;
                 retorno.ExceptionMessage = null;
                 return Ok(retorno);
             }

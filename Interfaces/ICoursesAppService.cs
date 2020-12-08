@@ -5,9 +5,9 @@ namespace CourseSignUP.Interfaces
 {
     public interface ICoursesAppService
     {
-        IEnumerable<CourseDto> GetCourse();
-        bool CreateCourse(CreateCourseDto course);
-        bool SignUPCourse(SignUpToCourseDto matricula);
+        IEnumerable<CourseDto> GetCourse(string Id);
+        string CreateCourse(CourseDto course);
+        string SignUPCourse(SignUpToCourseDto matricula);
     }
 }
 
