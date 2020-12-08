@@ -1,6 +1,6 @@
 # # Assignment: Course Sign-up System
 
-Candidato: **Fábio Sarmento Pereira**. 
+Candidato: **FÃ¡bio Sarmento Pereira**. 
 Prova Tecnica : **Analista Desenvolvedor .NET**. 
 
 
@@ -8,25 +8,25 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 **Domain Model Design accessible**
 **Banco de Dados SQL-Server - Cloud Azure**
-**Api´s publicadas - Cloud Azure**
+**ApiÂ´s publicadas - Cloud Azure**
 
 
 # Swagger 
-|                |                          |
+|                |                               |
 |----------------|-------------------------------|-----------------------------|
-|Swagger |`https://coursesignup.azurewebsites.net/swagger/index.html            |           |
+|Swagger |`https://coursesignup.azurewebsites.net/swagger/index.html           
 |
 
-# Métodos 
+# MÃ©todos 
 
-|                |                         |                        |
+|                |                               |                        |
 |----------------|-------------------------------|-----------------------------|
-|GetCourse|     Consulta dos cursos cadastrados           |            |
-|CreateCourse          |Cadastro dos cursos           |            |
+|GetCourse            Consulta dos cursos cadastrados           |            |
+|CreateCourse     |Cadastro dos cursos           |            |
 |CreateLecture          | Cadastro Professores|, |
 |SignUpCorse          | Matriculas Alunos`|
 
 
 
-# Integração Contínua 
+# IntegraÃ§Ã£o ContÃ­nua 
 
