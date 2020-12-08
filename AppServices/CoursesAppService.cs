@@ -23,15 +23,26 @@ namespace CourseSignUP.AppServices
         }
 
         #region  public IEnumerable<CourseDto> GetCourse(string id) 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public IEnumerable<CourseDto> GetCourse() 
         {
            return _repository.Consultar();
         }
         #endregion
+
+        #region  public bool CreateCourse(CreateCourseDto course) 
+        public bool CreateCourse(CreateCourseDto course)
+        {
+            return _repository.Incluir(course);
+        }
+        #endregion
+
+        #region  public bool CreateCourse(string id) 
+        public bool SignUPCourse(SignUpToCourseDto matricula)
+        {
+            return _repository.Matricular(matricula);
+        }
+        #endregion
+
+
     }
 }

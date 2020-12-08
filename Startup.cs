@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using CourseSignUP.Interfaces;
 using CourseSignUP.AppServices;
 using CourseSignUP.DTO;
+using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 
 namespace WebAppTest
 {
@@ -31,7 +33,30 @@ namespace WebAppTest
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddScoped<ICoursesAppService,CoursesAppService>();
+            services.AddScoped<ILecturerAppService, LecturerAppService>();
             services.AddScoped<ILogger, Logger<CourseDto>>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "CourseSignUp",
+                    Description = "API Prova Tecnica Grupo Chamma",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Fabio Sarmento",
+                        Email = "fabiosarmentopereira@gmail.com",
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license")
+                    }
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +66,6 @@ namespace WebAppTest
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
