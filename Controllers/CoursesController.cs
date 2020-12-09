@@ -27,9 +27,10 @@ namespace CourseSignUP.Controllers
 
         #region public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse(string id)
         /// <summary>
-        ///    Listar cursos 
+        /// Listar cursos 
         /// </summary>
         /// <returns>course</returns>
+        /// <response code="200">Retorna os cursos cadastrados</response>
         [HttpGet, Route("GetCourse")]
         public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse(string Id)
         {
@@ -56,9 +57,10 @@ namespace CourseSignUP.Controllers
 
         #region public async Task<ActionResult<ResponseDTO<string>>> CreateCourse(CourseDto course)
         /// <summary>
-        ///  Incluir Palestra
+        /// Cadastrar Curso
         /// </summary>
         /// <returns>course</returns>
+        /// <response code="200">Cadastra novos cursos </response>
         [HttpPost, Route("CreateCourse")]
         public async Task<ActionResult<ResponseDTO<string>>> CreateCourse(CourseDto course)
         {
@@ -85,9 +87,10 @@ namespace CourseSignUP.Controllers
 
         #region  public async Task<ActionResult<ResponseDTO<string>>> SignUPCourse(SignUpToCourseDto matricula)
         /// <summary>
-        ///  Incluir Palestra
+        /// Inscrever aluno em curso
         /// </summary>
         /// <returns>course</returns>
+        /// <response code="200">Inscreve novos alunos de acordo com a capacidade do curso </response>
         [HttpPost, Route("SignUPCourse")]
         public async Task<ActionResult<ResponseDTO<string>>> SignUPCourse(SignUpToCourseDto matricula)
         {

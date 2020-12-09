@@ -15,6 +15,9 @@ using CourseSignUP.AppServices;
 using CourseSignUP.DTO;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.Swagger;
+using System.Reflection;
+using System.IO;
 
 namespace WebAppTest
 {
@@ -31,7 +34,6 @@ namespace WebAppTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddSwaggerGen();
             services.AddScoped<ICoursesAppService,CoursesAppService>();
             services.AddScoped<ILecturerAppService,LecturerAppService>();
             services.AddScoped<IStatisticsAppService,StatisticsAppService>();
@@ -58,6 +60,10 @@ namespace WebAppTest
                         Url = new Uri("https://example.com/license")
                     }
                 });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 

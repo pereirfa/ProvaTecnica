@@ -22,9 +22,10 @@ namespace CourseSignUP.Controllers
 
         #region public async Task<ActionResult<ResponseDTO<bool>>> CreateLecturer(CreateLecturerDto lecturer)
         /// <summary>
-        ///  Incluir Palestra
+        ///  Incluir Palestrante
         /// </summary>
         /// <returns>course</returns>
+        /// <response code="200">Cadastra novos palestrantes </response>
         [HttpPost, Route("CreateLecturer")]
         public async Task<ActionResult<ResponseDTO<bool>>> CreateLecturer(CreateLecturerDto lecturer)
         {

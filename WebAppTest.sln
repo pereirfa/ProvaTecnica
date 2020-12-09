@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourseSignUP", "CourseSignUP.csproj", "{5CA962DA-3177-40D5-9CDE-DF2CD90A58CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestCourseSignUP", "..\XUnitTestCourseSignUP\XUnitTestCourseSignUP.csproj", "{3145DB92-5B1F-4EAD-9251-CAB27AC7389B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5CA962DA-3177-40D5-9CDE-DF2CD90A58CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5CA962DA-3177-40D5-9CDE-DF2CD90A58CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5CA962DA-3177-40D5-9CDE-DF2CD90A58CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3145DB92-5B1F-4EAD-9251-CAB27AC7389B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3145DB92-5B1F-4EAD-9251-CAB27AC7389B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3145DB92-5B1F-4EAD-9251-CAB27AC7389B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3145DB92-5B1F-4EAD-9251-CAB27AC7389B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -27,9 +27,10 @@ namespace CourseSignUP.Controllers
 
         #region public async Task<ActionResult<ResponseDTO<IEnumerable<CourseDto>>>> GetCourse(string id)
         /// <summary>
-        ///    Listar cursos 
+        /// Consultar estatisticas
         /// </summary>
         /// <returns>course</returns>
+        /// <response code="200">Lista as estatisticas por idade e curso </response>
         [HttpGet, Route("GetStatistics")]
         public async Task<ActionResult<ResponseDTO<IEnumerable<StatisticsDto>>>> GetStatistics()
         {
