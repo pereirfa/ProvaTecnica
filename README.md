@@ -5,6 +5,7 @@ Candidato: **Fábio Sarmento Pereira**.
 Prova Tecnica : **Analista Desenvolvedor .NET**. 
 
 
+
 # Caracteristicas
 
 **Domain Model Design accessible**
@@ -16,11 +17,13 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 **Utilização NUnit - Tests**
 
 
+
 # Swagger 
-|                |                          |
-|----------------|-------------------------------|-----------------------------|
-|Swagger |https://coursesignup.azurewebsites.net/swagger/index.html            |           |
-|
+
+https://coursesignup.azurewebsites.net/swagger/index.html           
+
+
+
 
 # Métodos 
 
@@ -33,6 +36,8 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
  
  **SignUpCorse**   |      Matriculas Alunos
  
+
+
 
 
 # Integração Contínua 
