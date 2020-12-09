@@ -2,17 +2,19 @@
 
 Candidato: **Fábio Sarmento Pereira**. 
 
-|----------------|-------------------------------|-----------------------------|
-
 Prova Tecnica : **Analista Desenvolvedor .NET**. 
 
 
 # Caracteristicas
 
 **Domain Model Design accessible**
+
 **Banco de Dados SQL-Server - Cloud Azure**
+
 **Api´s publicadas - Cloud Azure**
+
 **Utilização NUnit - Tests**
+
 
 # Swagger 
 |                |                          |
