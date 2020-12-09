@@ -9,7 +9,7 @@
             Listar cursos 
             </summary>
             <returns>course</returns>
-            <response code="200">Returna os cursos cadastrados</response>
+            <response code="200">Retorna os cursos cadastrados</response>
         </member>
         <member name="M:CourseSignUP.Controllers.CoursesController.CreateCourse(CourseSignUP.DTO.CourseDto)">
             <summary>
