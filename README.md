@@ -7,7 +7,7 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 
 
-# Caracteristicas
+# Características
 
 **Domain Model Design accessible**
 
