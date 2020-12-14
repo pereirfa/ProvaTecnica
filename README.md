@@ -12,11 +12,13 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 **Integração Rabbit MQ**
 
-** Api´s REST**
+**Api´s REST**
+
 
 
 # Metodos
-|---------------- |-------------------------------|-----------------------------|
+
+
 |Course           |     Consulta e Cadastro de Cursos                 |   
 
 |SignUpToCourse   |     Inscricao de Alunos                           |   
