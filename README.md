@@ -5,6 +5,8 @@ Candidato: **Fábio Sarmento Pereira**
 Prova Tecnica : **Analista Desenvolvedor .NET**. 
 
 
+
+
 # Caracteristicas
 
 **Domain Model Design accessible**
@@ -17,11 +19,17 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 
 
+
+
 # Metodos
 
 
-**Course** : Consulta e Cadastro de Cursos                 |   
+**Course** : Consulta e Cadastro de Cursos                  
 
-**SignUpToCourse** : Inscricao de Alunos                           |   
+**SignUpToCourse** : Inscricao de Alunos                             
 
-**Statistics** : Consulta Estatisticas de Idade dos alunos     |
+**Statistics** : Consulta Estatisticas de Idade dos alunos   
+
+
+
+   
