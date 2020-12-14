@@ -1,6 +1,7 @@
 # # Assignment: Course Sign-up System
 
-Candidato: **Fábio Sarmento Pereira**. 
+Candidato: **Fábio Sarmento Pereira**
+
 Prova Tecnica : **Analista Desenvolvedor .NET**. 
 
 
@@ -19,8 +20,8 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 # Metodos
 
 
-|Course           |     Consulta e Cadastro de Cursos                 |   
+**Course** : Consulta e Cadastro de Cursos                 |   
 
-|SignUpToCourse   |     Inscricao de Alunos                           |   
+**SignUpToCourse** : Inscricao de Alunos                           |   
 
-|Statistics       |     Consulta Estatisticas de Idade dos alunos     |
+**Statistics** : Consulta Estatisticas de Idade dos alunos     |
