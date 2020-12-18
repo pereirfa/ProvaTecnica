@@ -1,17 +1,17 @@
-﻿using CourseSignUp.Domain.Model;
+﻿using CourseSignUp.Domain.Entities;
 using System.Collections.Generic;
 
 namespace CourseSignUp.Domain.Repository
 {
     public interface ICourseSignUpRepository
     {
-        IEnumerable<CourseModel> GetAll();
+        IEnumerable<Course> GetAll();
 
-        CourseModel Get(string id);
+        Course Get(string id);
 
-        CourseModel Update(CourseModel course);
+        Course Update(Course course);
 
-        CourseModel Create(CourseModel course);
+        Course Create(Course course);
 
         string Delete(string id);
     }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CourseSignUp.Domain.ViewModel
+﻿namespace CourseSignUp.Application.Model
 {
-    public class StatisticsViewModel
+    public class StatisticsModel
     {
         public string CourseId { get; set; }
         public int MinAge { get; set; }

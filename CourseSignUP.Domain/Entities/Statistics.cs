@@ -1,7 +1,7 @@
 ﻿
-namespace CourseSignUp.Domain.Model
+namespace CourseSignUp.Domain.Entities
 {
-    public class StatisticsModel
+    public class Statistics
     {
         public string CourseId { get; set; }
         public int MinAge { get; set; }

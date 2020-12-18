@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CourseSignUp.Application</name>
+    </assembly>
+    <members>
+        <member name="M:CourseSignUp.Controllers.CoursesController.GetAll">
+            <summary>
+            Listar todos os cursos 
+            </summary>
+            <returns>course</returns>
+            <response code="200">Retorna todos os cursos cadastrados</response>
+        </member>
+        <member name="M:CourseSignUp.Controllers.CoursesController.Get(System.String)">
+            <summary>
+            Listar curso pelo Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Busca do curso com sucesso.</response>
+        </member>
+        <member name="M:CourseSignUp.Controllers.CoursesController.Post(CourseSignUp.Application.Model.CourseModel)">
+            <summary>
+            Cadastrar curso
+            </summary>
+            <returns>course</returns>
+            <response code="200">Cadastro executado com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Controllers.CoursesController.Put(CourseSignUp.Application.Model.CourseModel)">
+            <summary>
+            Atualizar curso
+            </summary>
+            <returns>course</returns>
+            <response code="200">Curso atualizado com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Controllers.CoursesController.Delete(System.String)">
+            <summary>
+            Deletar curso por Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Curso deletado com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.#ctor(AutoMapper.IMapper,MediatR.IMediator,Microsoft.Extensions.Logging.ILogger{CourseSignUp.Application.Controllers.SignUpToCourseController})">
+            <summary>
+            
+            </summary>
+            <param name="mapper"></param>
+            <param name="mediator"></param>
+            <param name="logger"></param>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Get(System.String)">
+            <summary>
+            Listar matricula pelo Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Busca do curso com sucesso.</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Post(CourseSignUp.Application.Model.SignUpToCourseModel)">
+            <summary>
+            Matricular aluno em curso
+            </summary>
+            <returns>course</returns>
+            <response code="200">Aluno matriculado com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.StatisticsController.GetAll">
+            <summary>
+            Buscar todas as estatisticas
+            </summary>
+            <returns>course</returns>
+            <response code="200">Estatistica consultada com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.StatisticsController.Get(System.String)">
+            <summary>
+            Buscar as estatisticas por Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Estatistica consultada com sucesso</response>
+        </member>
+    </members>
+</doc>

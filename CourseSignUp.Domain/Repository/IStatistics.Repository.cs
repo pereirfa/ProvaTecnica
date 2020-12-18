@@ -1,12 +1,12 @@
-﻿using CourseSignUp.Domain.Model;
+﻿using CourseSignUp.Domain.Entities;
 using System.Collections.Generic;
 
 namespace CourseSignUp.Domain.Repository
 {
     public interface IStatisticsRepository
     {
-        IEnumerable<StatisticsModel> GetAll();
+        IEnumerable<Statistics> GetAll();
 
-        StatisticsModel Get(string id);
+        Statistics Get(string id);
     }
 }

@@ -1,12 +1,12 @@
-﻿using CourseSignUp.Domain.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CourseSignUp.Domain.Entities;
 
 namespace CourseSignUp.Domain.Repository
 {
     public interface ISignUpToCourseRepository
     {
-        SignUpToCourseModel Create(SignUpToCourseModel courseSignUpToCourse);
+        SignUpToCourse Create(SignUpToCourse courseSignUpToCourse);
+
+        SignUpToCourse Get(string id);
+
     }
 }

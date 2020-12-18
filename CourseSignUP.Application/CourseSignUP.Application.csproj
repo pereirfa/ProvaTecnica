@@ -4,6 +4,21 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+    <OutputPath></OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>.\CourseSignUp.Application.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="9.3.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="5.6.3" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\CourseSignUp.Domain\CourseSignUp.Domain.csproj" />
     <ProjectReference Include="..\CourseSignUp.Infra\CourseSignUp.Infra.csproj" />

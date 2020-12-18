@@ -1,6 +1,6 @@
-﻿namespace CourseSignUp.Domain.Model
+﻿namespace CourseSignUp.Domain.Entities
 {
-    public class CourseModel
+    public class Course
     {
         public string Id { get; set; }
         public int Capacity { get; set; }
