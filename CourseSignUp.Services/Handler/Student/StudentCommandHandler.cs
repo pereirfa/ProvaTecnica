@@ -21,7 +21,7 @@ namespace CourseSignUp.Services.Handler.Student
             _StudentRepository = studentRepository;
         }
 
-        public Task<Domain.Entities.Student> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
                 _StudentRepository.Create(request.Student)

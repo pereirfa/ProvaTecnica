@@ -47,16 +47,30 @@
             <param name="mediator"></param>
             <param name="logger"></param>
         </member>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Get(System.Int32)">
+            <summary>
+            Consultar as matriculas por curso 
+            </summary>
+            <returns>course</returns>
+            <response code="200">Estatistica consultada com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Post(CourseSignUp.Application.Model.SignUpToCourseModel)">
+            <summary>
+            Incluir as matriculas por Id do aluno e curso
+            </summary>
+            <returns>course</returns>
+            <response code="200">Estatistica consultada com sucesso</response>
+        </member>
         <member name="M:CourseSignUp.Application.Controllers.StatisticsController.GetAll">
             <summary>
-            Buscar todas as estatisticas
+            Calcular a media de idade para todos os cursos
             </summary>
             <returns>course</returns>
             <response code="200">Estatistica consultada com sucesso</response>
         </member>
         <member name="M:CourseSignUp.Application.Controllers.StatisticsController.Get(System.Int32)">
             <summary>
-            Buscar as estatisticas por Id
+            Calcular as medias de idade por curso especifico
             </summary>
             <returns>course</returns>
             <response code="200">Estatistica consultada com sucesso</response>
@@ -74,6 +88,20 @@
             </summary>
             <returns>course</returns>
             <response code="200">Busca do aluno com sucesso.</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Commons.AutoMapper.Controllers.StudentsController.Post(CourseSignUp.Application.Model.StudentModel)">
+            <summary>
+            Cadastrar aluno
+            </summary>
+            <returns>course</returns>
+            <response code="200">Cadastro executado com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Commons.AutoMapper.Controllers.StudentsController.Delete(System.Int32)">
+            <summary>
+            Deletar aluno por Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Aluno deletado com sucesso</response>
         </member>
     </members>
 </doc>
