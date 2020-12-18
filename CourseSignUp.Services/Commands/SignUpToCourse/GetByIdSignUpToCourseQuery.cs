@@ -4,9 +4,9 @@ namespace CourseSignUp.Services.Commands.SignUpToCourse
 {
     public class GetByIdSignUpToCourseQuery : IRequest<Domain.Entities.SignUpToCourse>
     {
-        public string Id { get; private set; }
+        public int Id { get; private set; }
 
-        public GetByIdSignUpToCourseQuery(string id)
+        public GetByIdSignUpToCourseQuery(int id)
         {
             Id = id;
         }

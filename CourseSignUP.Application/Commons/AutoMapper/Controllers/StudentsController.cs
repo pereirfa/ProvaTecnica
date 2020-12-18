@@ -6,22 +6,22 @@ using System.Net.Http;
 using MediatR;
 using AutoMapper;
 using CourseSignUp.Domain.Entities;
-using CourseSignUp.Services.Commands.Course;
+using CourseSignUp.Services.Commands.Student;
 using System.Collections.Generic;
 using CourseSignUp.Application.Model;
 
-namespace CourseSignUp.Controllers
+namespace CourseSignUp.Application.Commons.AutoMapper.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CoursesController : ControllerBase
+    public class StudentsController : ControllerBase
     {
         private readonly ILogger _Logger;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
 
-        public CoursesController(
-            ILogger<CoursesController> logger,
+        public StudentsController(
+            ILogger<StudentsController> logger,
             IMediator mediator,
             IMapper mapper)
         {
@@ -30,34 +30,33 @@ namespace CourseSignUp.Controllers
             _mapper = mapper;
         }
 
-
         #region GetAll()
         /// <summary>
-        /// Listar todos os cursos 
+        /// Listar todos os alunos 
         /// </summary>
         /// <returns>course</returns>
-        /// <response code="200">Retorna todos os cursos cadastrados</response>
+        /// <response code="200">Retorna todos os alunos cadastrados</response>
         [HttpGet]
         public ActionResult GetAll()
         {
             try
             {
-                var course = _mediator.Send(new GetAllCourseQuery()).Result;
-                return Ok(_mapper.Map<IEnumerable<CourseModel>>(course));
+                var course = _mediator.Send(new GetAllStudentQuery()).Result;
+                return Ok(_mapper.Map<IEnumerable<StudentModel>>(course));
             }
             catch (HttpRequestException ex)
-           {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+            {
+                _Logger.LogError(ex, "[StudentsController.GetAll] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (ArgumentException ex)
-            {                
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+            {
+                _Logger.LogError(ex, "[StudentsController.GetAll] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.GetAll] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -65,18 +64,18 @@ namespace CourseSignUp.Controllers
 
         #region Get(Id)
         /// <summary>
-        /// Listar curso pelo Id
+        /// Listar aluno pelo Id
         /// </summary>
         /// <returns>course</returns>
-        /// <response code="200">Busca do curso com sucesso.</response>
+        /// <response code="200">Busca do aluno com sucesso.</response>
         [HttpGet]
         [Route("{id}")]
         public ActionResult Get(int id)
         {
             try
             {
-                var course = _mediator.Send(new GetByIdCourseQuery(id)).Result;
-                return Ok(_mapper.Map<CourseModel>(course));
+                var course = _mediator.Send(new GetByIdStudentQuery(id)).Result;
+                return Ok(_mapper.Map<StudentModel>(course));
             }
             catch (HttpRequestException ex)
             {
@@ -98,63 +97,31 @@ namespace CourseSignUp.Controllers
 
         #region Create()
         /// <summary>
-        /// Cadastrar curso
+        /// Cadastrar aluno
         /// </summary>
         /// <returns>course</returns>
         /// <response code="200">Cadastro executado com sucesso</response>
         [HttpPost]
-        public ActionResult Post([FromBody] CourseModel model)
+        public ActionResult Post([FromBody] StudentModel model)
         {
             try
             {
-                var course = _mediator.Send(new CreateCourseCommand(_mapper.Map<Course>(model))).Result;
+                var course = _mediator.Send(new CreateStudentCommand(_mapper.Map<Student>(model))).Result;
                 return Ok(_mapper.Map<CourseModel>(course));
             }
             catch (HttpRequestException ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Create] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (ArgumentException ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Create] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-            }
-        }
-        #endregion
-
-        #region Put()
-        /// <summary>
-        /// Atualizar curso
-        /// </summary>
-        /// <returns>course</returns>
-        /// <response code="200">Curso atualizado com sucesso</response>
-        [HttpPut]
-        public ActionResult Put([FromBody] CourseModel model)
-        {
-            try
-            {
-                var course = _mediator.Send(new UpdateCourseCommand(_mapper.Map<Course>(model))).Result;
-                return Ok(_mapper.Map<CourseModel>(course));
-            }
-            catch (HttpRequestException ex)
-            {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-            }
-            catch (ArgumentException ex)
-            {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
-                return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
-            }
-            catch (Exception ex)
-            {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Create] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
@@ -162,34 +129,37 @@ namespace CourseSignUp.Controllers
 
         #region Delete()
         /// <summary>
-        /// Deletar curso por Id
+        /// Deletar aluno por Id
         /// </summary>
         /// <returns>course</returns>
-        /// <response code="200">Curso deletado com sucesso</response>
+        /// <response code="200">Aluno deletado com sucesso</response>
         [HttpDelete]
         [Route("{id}")]
         public ActionResult Delete(int id)
         {
             try
             {
-                return Ok(_mediator.Send(new DeleteCourseCommand(id)).Result);
+                return Ok(_mediator.Send(new DeleteStudentCommand(id)).Result);
             }
             catch (HttpRequestException ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Delete] - Http Request Failed." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (ArgumentException ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Delete] - Argument Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
             catch (Exception ex)
             {
-                _Logger.LogError(ex, "[CoursesController.GetAll] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
+                _Logger.LogError(ex, "[StudentsController.Delete] - Generic Error." + ex.Message + " | StackTrace = " + ex.StackTrace, null);
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
             }
         }
         #endregion
+
+
+
     }
 }

@@ -32,7 +32,7 @@ namespace CourseSignUp.Application.Controllers
 
         #region GetAll()
         /// <summary>
-        /// Buscar todas as estatisticas
+        /// Calcular a media de idade para todos os cursos
         /// </summary>
         /// <returns>course</returns>
         /// <response code="200">Estatistica consultada com sucesso</response>
@@ -65,13 +65,13 @@ namespace CourseSignUp.Application.Controllers
 
         #region Get(id)
         /// <summary>
-        /// Buscar as estatisticas por Id
+        /// Calcular as medias de idade por curso especifico
         /// </summary>
         /// <returns>course</returns>
         /// <response code="200">Estatistica consultada com sucesso</response>
         [HttpGet]
         [Route("{id}")]
-        public ActionResult Get(string id)
+        public ActionResult Get(int id)
         {
             try
             {

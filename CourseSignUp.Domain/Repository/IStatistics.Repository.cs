@@ -7,6 +7,6 @@ namespace CourseSignUp.Domain.Repository
     {
         IEnumerable<Statistics> GetAll();
 
-        Statistics Get(string id);
+        Statistics Get(int id);
     }
 }

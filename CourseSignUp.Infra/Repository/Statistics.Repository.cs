@@ -22,12 +22,14 @@ namespace CourseSignUp.Infra.Repository
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
 
             string queryString =
-           " SELECT CourseId , " +
-           "  MIN(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as MinAge , " +
-           "  Max(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as MaxAge , " +
-           "  AVG(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as AvgAge " +
-           "  FROM dbo.SignUPToCourse " +
-           "  GROUP BY CourseId ; ";
+             " SELECT C.CourseName , " +
+             " MIN(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as MinAge , " +
+             " Max(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as MaxAge , " +
+             " AVG(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as AvgAge " +
+             " FROM dbo.SignUPToCourse SU " +
+             " INNER JOIN dbo.Student S on SU.StudentId = S.StudentId " +
+             " INNER JOIN dbo.Course C on SU.CourseId = C.CourseId " +
+             " GROUP BY C.CourseName ";
 
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
@@ -41,7 +43,7 @@ namespace CourseSignUp.Infra.Repository
                     {
                         statisticresult.Add(new Statistics()
                         {
-                            CourseId = reader.GetString(0),
+                            CourseName = reader.GetString(0),
                             MinAge = reader.GetInt32(1),
                             MaxAge = reader.GetInt32(2),
                             AvgAge = reader.GetInt32(3)
@@ -58,19 +60,20 @@ namespace CourseSignUp.Infra.Repository
             return statisticresult;
         }
 
-        public Statistics Get(string id)
+        public Statistics Get(int id)
         {
             var statisticresult = new Statistics();
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
 
             string queryString =
-           " SELECT CourseId , " +
-           "  MIN(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as MinAge , " +
-           "  Max(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as MaxAge , " +
-           "  AVG(DATEDIFF(hour, DateOfBirth, getdate()) / 8766) as AvgAge " +
-           "  FROM dbo.SignUPToCourse " +
-           "  Where CourseId = @Id " +
-           "  GROUP BY CourseId ; ";
+             " SELECT C.CourseName , " +
+             " MIN(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as MinAge , " +
+             " Max(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as MaxAge , " +
+             " AVG(DATEDIFF(hour, S.DateOfBirth, getdate()) / 8766) as AvgAge " +
+             " FROM dbo.SignUPToCourse SU " +
+             " INNER JOIN dbo.Student S on SU.StudentId = S.StudentId " +
+             " INNER JOIN dbo.Course C on SU.CourseId = C.CourseId " +
+             " WHERE SU.SignUPId = @Id "; 
 
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
@@ -78,12 +81,12 @@ namespace CourseSignUp.Infra.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@Id", SqlDbType.VarChar, 5).Value = id;
+                    command.Parameters.Add("@Id", SqlDbType.Int).Value = id;
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        statisticresult.CourseId = reader.GetString(0);
+                        statisticresult.CourseName = reader.GetString(0);
                         statisticresult.MinAge = reader.GetInt32(1);
                         statisticresult.MaxAge = reader.GetInt32(2);
                         statisticresult.AvgAge = reader.GetInt32(3);

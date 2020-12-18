@@ -11,7 +11,7 @@
             <returns>course</returns>
             <response code="200">Retorna todos os cursos cadastrados</response>
         </member>
-        <member name="M:CourseSignUp.Controllers.CoursesController.Get(System.String)">
+        <member name="M:CourseSignUp.Controllers.CoursesController.Get(System.Int32)">
             <summary>
             Listar curso pelo Id
             </summary>
@@ -32,7 +32,7 @@
             <returns>course</returns>
             <response code="200">Curso atualizado com sucesso</response>
         </member>
-        <member name="M:CourseSignUp.Controllers.CoursesController.Delete(System.String)">
+        <member name="M:CourseSignUp.Controllers.CoursesController.Delete(System.Int32)">
             <summary>
             Deletar curso por Id
             </summary>
@@ -47,20 +47,6 @@
             <param name="mediator"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Get(System.String)">
-            <summary>
-            Listar matricula pelo Id
-            </summary>
-            <returns>course</returns>
-            <response code="200">Busca do curso com sucesso.</response>
-        </member>
-        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Post(CourseSignUp.Application.Model.SignUpToCourseModel)">
-            <summary>
-            Matricular aluno em curso
-            </summary>
-            <returns>course</returns>
-            <response code="200">Aluno matriculado com sucesso</response>
-        </member>
         <member name="M:CourseSignUp.Application.Controllers.StatisticsController.GetAll">
             <summary>
             Buscar todas as estatisticas
@@ -68,12 +54,26 @@
             <returns>course</returns>
             <response code="200">Estatistica consultada com sucesso</response>
         </member>
-        <member name="M:CourseSignUp.Application.Controllers.StatisticsController.Get(System.String)">
+        <member name="M:CourseSignUp.Application.Controllers.StatisticsController.Get(System.Int32)">
             <summary>
             Buscar as estatisticas por Id
             </summary>
             <returns>course</returns>
             <response code="200">Estatistica consultada com sucesso</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Commons.AutoMapper.Controllers.StudentsController.GetAll">
+            <summary>
+            Listar todos os alunos 
+            </summary>
+            <returns>course</returns>
+            <response code="200">Retorna todos os alunos cadastrados</response>
+        </member>
+        <member name="M:CourseSignUp.Application.Commons.AutoMapper.Controllers.StudentsController.Get(System.Int32)">
+            <summary>
+            Listar aluno pelo Id
+            </summary>
+            <returns>course</returns>
+            <response code="200">Busca do aluno com sucesso.</response>
         </member>
     </members>
 </doc>

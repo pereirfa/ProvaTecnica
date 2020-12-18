@@ -7,7 +7,7 @@ namespace CourseSignUp.Application.Validators
     {
         public CourseValidator()
         {
-            RuleFor(x => string.IsNullOrWhiteSpace(x.Id))
+            RuleFor(x => x.CourseId == 0 )
                 .Equal(false).WithMessage("Necessário informar o ID do curso.");
             RuleFor(x => x.Capacity <= 0 || x.Capacity > 40)
                 .Equal(false).WithMessage("Capacidade do curso inválida, valores permitidos entre 1 e 40.");

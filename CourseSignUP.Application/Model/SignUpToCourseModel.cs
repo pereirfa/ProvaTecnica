@@ -4,7 +4,7 @@ namespace CourseSignUp.Application.Model
 {
     public class SignUpToCourseModel
     {
-        public string CourseId { get; set; }
+        public CourseModel Course { get; set; }
         public StudentModel Student { get; set; }
     }
 }

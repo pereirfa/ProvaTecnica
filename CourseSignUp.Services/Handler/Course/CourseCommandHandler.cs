@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace CourseSignUp.Services.Handler.Course
 {
-    public class CourseCommandHandler : IRequestHandler<CreateCourseCommand, Domain.Entities.Course>,
+    public class CourseCommandHandler : IRequestHandler<CreateCourseCommand, bool>,
                                         IRequestHandler<UpdateCourseCommand, Domain.Entities.Course>,
                                         IRequestHandler<GetByIdCourseQuery, Domain.Entities.Course>,
                                         IRequestHandler<GetAllCourseQuery, IEnumerable<Domain.Entities.Course>>,
-                                        IRequestHandler<DeleteCourseCommand, string>
+                                        IRequestHandler<DeleteCourseCommand, bool>
     {
         private readonly ICourseSignUpRepository _CourseRepository;
 
@@ -20,7 +20,7 @@ namespace CourseSignUp.Services.Handler.Course
             _CourseRepository = courseRepository;
         }
 
-        public Task<Domain.Entities.Course> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
                 _CourseRepository.Create(request.Course)
@@ -48,7 +48,7 @@ namespace CourseSignUp.Services.Handler.Course
             );
         }
 
-        public Task<string> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
                 _CourseRepository.Delete(request.Id)

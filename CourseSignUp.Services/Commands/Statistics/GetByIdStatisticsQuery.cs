@@ -4,9 +4,9 @@ namespace CourseSignUp.Services.Commands.Statistics
 {
     public class GetByIdStatisticsQuery : IRequest<Domain.Entities.Statistics>
     {
-        public string Id { get; private set; }
+        public int Id { get; private set; }
 
-        public GetByIdStatisticsQuery(string id)
+        public GetByIdStatisticsQuery(int id)
         {
             Id = id;
         }

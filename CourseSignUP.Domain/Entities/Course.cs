@@ -2,7 +2,9 @@
 {
     public class Course
     {
-        public string Id { get; set; }
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
+
         public int Capacity { get; set; }
         public int NumberOfStudents { get; set; }
 
@@ -13,5 +15,6 @@
             else
                 return true;
         }
+
     }
 }

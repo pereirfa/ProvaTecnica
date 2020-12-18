@@ -6,9 +6,11 @@ using CourseSignUp.Domain.Entities;
 using CourseSignUp.Services.Commands.Course;
 using CourseSignUp.Services.Commands.SignUpToCourse;
 using CourseSignUp.Services.Commands.Statistics;
+using CourseSignUp.Services.Commands.Student;
 using CourseSignUp.Services.Handler.Course;
 using CourseSignUp.Services.Handler.SignUpToCourse;
 using CourseSignUp.Services.Handler.Statistics;
+using CourseSignUp.Services.Handler.Student;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
@@ -63,17 +65,22 @@ namespace CourseSignUp.Application
             services.AddAutoMapper(typeof(Startup));
             
             services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddTransient<IRequestHandler<CreateCourseCommand, Course>, CourseCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateCourseCommand, bool>, CourseCommandHandler>();
             services.AddTransient<IRequestHandler<UpdateCourseCommand, Course>, CourseCommandHandler>();
             services.AddTransient<IRequestHandler<GetByIdCourseQuery, Course>, CourseCommandHandler>();
             services.AddTransient<IRequestHandler<GetAllCourseQuery, IEnumerable<Course>>, CourseCommandHandler>();
-            services.AddTransient<IRequestHandler<DeleteCourseCommand, string>, CourseCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteCourseCommand, bool>, CourseCommandHandler>();
 
             services.AddTransient<IRequestHandler<CreateSignUpToCourseCommand, SignUpToCourse>, SignUpToCourseCommandHandler>();
             services.AddTransient<IRequestHandler<GetByIdSignUpToCourseQuery, SignUpToCourse>, SignUpToCourseCommandHandler>();
 
             services.AddTransient<IRequestHandler<GetAllStatisticsQuery, IEnumerable<Statistics>>, StatisticsCommandHandler>();
             services.AddTransient<IRequestHandler<GetByIdStatisticsQuery, Statistics>, StatisticsCommandHandler>();
+
+            services.AddTransient<IRequestHandler<CreateStudentCommand, bool>, StudentCommandHandler>();
+            services.AddTransient<IRequestHandler<DeleteStudentCommand, bool>, StudentCommandHandler>();
+            services.AddTransient<IRequestHandler<GetAllStudentQuery, IEnumerable<Student>>, StudentCommandHandler>();
+            services.AddTransient<IRequestHandler<GetByIdStudentQuery, Student>, StudentCommandHandler>();
 
             services.AddTransient<IValidator<CourseModel>, CourseValidator>();
             services.AddTransient<IValidator<SignUpToCourseModel>, SignUpToCourseValidator>();

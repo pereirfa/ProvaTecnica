@@ -12,6 +12,7 @@ namespace Api.CrossCutting.DependencyInjection
             services.AddScoped<ICourseSignUpRepository, CourseSignUpRepository>();
             services.AddScoped<ISignUpToCourseRepository, SignUpToCourseRepository>();
             services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
         }
     }
 }

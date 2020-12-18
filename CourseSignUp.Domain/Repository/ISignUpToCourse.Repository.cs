@@ -6,7 +6,6 @@ namespace CourseSignUp.Domain.Repository
     {
         SignUpToCourse Create(SignUpToCourse courseSignUpToCourse);
 
-        SignUpToCourse Get(string id);
-
+        SignUpToCourse Get(int id);
     }
 }

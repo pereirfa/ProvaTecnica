@@ -7,12 +7,12 @@ namespace CourseSignUp.Domain.Repository
     {
         IEnumerable<Course> GetAll();
 
-        Course Get(string id);
+        Course Get(int id);
 
         Course Update(Course course);
 
-        Course Create(Course course);
+        bool Create(Course course);
 
-        string Delete(string id);
+        bool Delete(int id);
     }
 }

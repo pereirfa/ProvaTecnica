@@ -2,11 +2,11 @@
 
 namespace CourseSignUp.Services.Commands.Course
 {
-    public class DeleteCourseCommand : IRequest<string>
+    public class DeleteCourseCommand : IRequest<bool>
     {
-        public string Id { get; private set; }
+        public int Id { get; private set; }
 
-        public DeleteCourseCommand(string id)
+        public DeleteCourseCommand(int id)
         {
             Id = id;
         }
