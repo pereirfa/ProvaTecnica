@@ -31,7 +31,7 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 ##  Modelo de Dados
 
-CREATE TABLE Student ( |---------------------------|--------------------------|
+CREATE TABLE **Student** ( 
                        | StudentId int identity ,  | 
                        | Email varchar(20) ,       | 
 		       | StudentName varchar(50) , | 
