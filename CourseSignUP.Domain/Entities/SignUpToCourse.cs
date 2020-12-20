@@ -1,4 +1,6 @@
-﻿namespace CourseSignUp.Domain.Entities
+﻿using System.Collections.Generic;
+
+namespace CourseSignUp.Domain.Entities
 {
     public class SignUpToCourse
     {
@@ -9,6 +11,6 @@
         public int StudentId { get; set; }
 
         public Course Course { get; set; }
-        public Student Student { get; set; }
+        public IEnumerable<Student> Student { get; set; }
     }
 }

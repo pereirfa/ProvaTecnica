@@ -1,4 +1,5 @@
 ﻿using CourseSignUp.Application.Model;
+using System.Collections.Generic;
 
 namespace CourseSignUp.Application.Model
 {
@@ -11,6 +12,6 @@ namespace CourseSignUp.Application.Model
         public int StudentId { get; set; }
 
         public CourseModel Course { get; set; }
-        public StudentModel Student { get; set; }
+        public IEnumerable<StudentModel> Student { get; set; }
     }
 }

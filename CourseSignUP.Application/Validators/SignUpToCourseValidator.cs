@@ -10,8 +10,9 @@ namespace CourseSignUp.Application.Validators
         {
             RuleFor(x => x.Course.CourseId == 0 )
                 .Equal(false).WithMessage("Necessário informar o ID do curso.");
-            RuleFor(x => x.Student.StudentId == 0)
-                .Equal(false).WithMessage("Necessário informar o ID do aluno.");
+            /*
+            RuleFor(x => x.Student == 0)
+                .Equal(false).WithMessage("Necessário informar o ID do aluno.");*/
         }
     }
 }

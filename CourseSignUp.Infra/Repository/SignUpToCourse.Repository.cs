@@ -39,6 +39,7 @@ namespace CourseSignUp.Infra.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
+                    command.Parameters.Add("@Id", SqlDbType.Int ).Value = id;
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
@@ -86,13 +87,16 @@ namespace CourseSignUp.Infra.Repository
                signupretorno.Course = new Course { CourseId = course.CourseId, Capacity = course.Capacity, CourseName = course.CourseName, NumberOfStudents = course.NumberOfStudents };
                var alumns = GetIdStudentsByCourse(id);
 
+               signupretorno.Student = alumns;
+
+                /*
                foreach ( Student item in alumns)
                {
                   signupretorno.Student = new Student { StudentId = item.StudentId, 
                                                         DateOfBirth = item.DateOfBirth, 
                                                         Email = item.Email, 
                                                         StudentName = item.StudentName };
-               }
+               }*/
             }
           
             return signupretorno;
@@ -133,8 +137,8 @@ namespace CourseSignUp.Infra.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@CourseId", SqlDbType.VarChar, 5).Value = courseSignUpToCourse.CourseId;
-                    command.Parameters.Add("@StudentId", SqlDbType.VarChar, 20).Value = courseSignUpToCourse.StudentId;
+                    command.Parameters.Add("@CourseId", SqlDbType.Int).Value = courseSignUpToCourse.CourseId;
+                    command.Parameters.Add("@StudentId", SqlDbType.Int).Value = courseSignUpToCourse.StudentId;
                     connection.Open();
                     command.ExecuteNonQuery();
                     connection.Close();
