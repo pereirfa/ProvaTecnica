@@ -31,14 +31,12 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 # Modelo de Dados
 
-|----------------|-------------------------------|-----------------------------|
-CREATE TABLE **Student** ( 
-                           StudentId int identity , 
-                           Email varchar(20) , 
-			   StudentName varchar(50) , 
-			   DateOfBirth Datetime , 
-			   Constraint Constraint_name Primary Key(StudentId)) ;
-|----------------|-------------------------------|-----------------------------|					   
+| CREATE TABLE | **Student** (     |
+                           |StudentId int identity |  
+                           |Email varchar(20)      |  
+			   |StudentName varchar(50) | 
+			   |DateOfBirth Datetime    | 
+			   |Constraint Constraint_name Primary Key(StudentId)) |
 
 CREATE TABLE **Course** (
 							 CourseId int identity,
