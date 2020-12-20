@@ -103,7 +103,7 @@ namespace CourseSignUp.Infra.Repository
                 "VALUES(@CourseId, @StudentId)";
 
             course = _CourseRepository.Get(IdCourse);
-            if (course.CheckCapacity())
+            if (course.NumberOfStudents >= course.Capacity )
             {
                 throw new ArgumentException("Capacidade excedida curso : " + course.CourseName);
             }
@@ -148,7 +148,7 @@ namespace CourseSignUp.Infra.Repository
         public bool VerifySignUp(int IdCourse , int IdStudent)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
-            string queryString = " select count(*) " +
+            string queryString = " select SignUPId " +
                                  " from dbo.SignUPToCourse " +
                                  " where CourseId = @IdCourse " +
                                  " and StudentId = @IdStudent ";
