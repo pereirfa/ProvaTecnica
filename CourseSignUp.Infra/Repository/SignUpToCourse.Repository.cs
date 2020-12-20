@@ -86,26 +86,15 @@ namespace CourseSignUp.Infra.Repository
             {
                signupretorno.Course = new Course { CourseId = course.CourseId, Capacity = course.Capacity, CourseName = course.CourseName, NumberOfStudents = course.NumberOfStudents };
                var alumns = GetIdStudentsByCourse(id);
-
                signupretorno.Student = alumns;
-
-                /*
-               foreach ( Student item in alumns)
-               {
-                  signupretorno.Student = new Student { StudentId = item.StudentId, 
-                                                        DateOfBirth = item.DateOfBirth, 
-                                                        Email = item.Email, 
-                                                        StudentName = item.StudentName };
-               }*/
             }
           
             return signupretorno;
         }
 
-        public bool Create(SignUpToCourse courseSignUpToCourse)
+        public bool Create(int IdCourse , int IdStudent)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
-            var signupretorno = new SignUpToCourse();
             var course = new Course();
             var student = new Student();
             
@@ -113,8 +102,7 @@ namespace CourseSignUp.Infra.Repository
               "  INSERT INTO dbo.SignUPToCourse(CourseId, StudentId) " +
                 "VALUES(@CourseId, @StudentId)";
 
-            course = _CourseRepository.Get(courseSignUpToCourse.CourseId);
-
+            course = _CourseRepository.Get(IdCourse);
             if (course.CheckCapacity())
             {
                 throw new ArgumentException("Capacidade excedida curso : " + course.CourseName);
@@ -122,13 +110,18 @@ namespace CourseSignUp.Infra.Repository
 
             if (course.CourseId == 0)
             {
-                throw new ArgumentException("Curso não encontrado");
+                throw new ArgumentException("Curso não encontrado!");
             }
 
-            student = _StudentRepository.Get(courseSignUpToCourse.StudentId);
-            if (course.CourseId == 0)
+            student = _StudentRepository.Get(IdStudent);
+            if (student.StudentId == 0)
             {
-                throw new ArgumentException("Aluno não encontrado");
+                throw new ArgumentException("Aluno não encontrado!");
+            }
+
+            if ( VerifySignUp(IdCourse , IdStudent))
+            {
+                throw new ArgumentException("Matrícula já incluída!");
             }
 
             using (SqlConnection connection =
@@ -137,12 +130,12 @@ namespace CourseSignUp.Infra.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@CourseId", SqlDbType.Int).Value = courseSignUpToCourse.CourseId;
-                    command.Parameters.Add("@StudentId", SqlDbType.Int).Value = courseSignUpToCourse.StudentId;
+                    command.Parameters.Add("@CourseId", SqlDbType.Int).Value = IdCourse;
+                    command.Parameters.Add("@StudentId", SqlDbType.Int).Value = IdStudent;
                     connection.Open();
                     command.ExecuteNonQuery();
                     connection.Close();
-                    _CourseRepository.UpdateNumberStudents(courseSignUpToCourse.CourseId);
+                    _CourseRepository.UpdateNumberStudents(IdCourse);
                 }
                 catch (Exception )
                 {
@@ -151,5 +144,46 @@ namespace CourseSignUp.Infra.Repository
             }
             return true; 
         }
+
+        public bool VerifySignUp(int IdCourse , int IdStudent)
+        {
+            string connectionString = _configuration.GetConnectionString("ConnectionCourse");
+            string queryString = " select count(*) " +
+                                 " from dbo.SignUPToCourse " +
+                                 " where CourseId = @IdCourse " +
+                                 " and StudentId = @IdStudent ";
+            int qtdSignUp = 0;
+
+            using (SqlConnection connection =
+               new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                try
+                {
+                    command.Parameters.Add("@IdCourse", SqlDbType.Int).Value = IdCourse;
+                    command.Parameters.Add("@IdStudent", SqlDbType.Int).Value = IdStudent;
+                    connection.Open();
+                    
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (reader.GetValue(0) != DBNull.Value)
+                            qtdSignUp = reader.GetInt32(0);
+                    }
+                    reader.Close();
+                    connection.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            if (qtdSignUp == 0)
+                return false;
+            else
+                return true;
+        }
+
     }
 }

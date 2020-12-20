@@ -55,12 +55,16 @@
             <returns>course</returns>
             <response code="200">Consulta realizada com sucesso</response>
         </member>
-        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Post(CourseSignUp.Application.Model.SignUpToCourseModel)">
-            <summary>
-            Incluir as matriculas por Id do aluno e curso
-            </summary>
-            <returns>course</returns>
-            <response code="200">Matricula realizada com sucesso</response>
+        <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Create(System.Int32,System.Int32)">
+             <summary>
+             Cadastrar matriculas por IdCourse e IdStudent
+            
+             </summary>
+             <param name="IdCourse"> Id Curso  </param>
+             <param name="IdStudent"> Id Student  </param>  
+             
+             <returns>course</returns>
+             <response code="200">Matricula realizada com sucesso</response>
         </member>
         <member name="M:CourseSignUp.Application.Controllers.StatisticsController.GetAll">
             <summary>

@@ -106,8 +106,7 @@ namespace CourseSignUp.Application.Commons.AutoMapper.Controllers
         {
             try
             {
-                var course = _mediator.Send(new CreateStudentCommand(_mapper.Map<Student>(model))).Result;
-                return Ok(_mapper.Map<StudentModel>(course));
+                return Ok(_mediator.Send(new CreateStudentCommand(_mapper.Map<Student>(model))).Result);
             }
             catch (HttpRequestException ex)
             {

@@ -11,7 +11,7 @@ namespace CourseSignUp.Application.Utils.AutoMapper
             CreateMap<CourseModel, Course>();
             CreateMap<Course, CourseModel>();
 
-            CreateMap<SignUpToCourseModel , SignUpToCourse>();
+            CreateMap<SignUpToCourseModel, SignUpToCourse>();
             CreateMap<SignUpToCourse, SignUpToCourseModel>();
 
             CreateMap<StatisticsModel, Statistics>();

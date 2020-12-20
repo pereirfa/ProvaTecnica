@@ -8,10 +8,10 @@ namespace CourseSignUp.Application.Validators
        public StudentValidator() 
        {
             RuleFor(x => string.IsNullOrWhiteSpace(x.StudentName))
-                .Equal(true).WithMessage("Informar o nome do aluno.");
-            RuleFor(x => x.StudentName.Length > 50 ).Equal(true).WithMessage("Nome do aluno excedeu tamanho máximo permitido.");
-            RuleFor(x => x.Email.Length > 20).Equal(true).WithMessage("Email do aluno excedeu tamanho máximo permitido.");
-            RuleFor(x => x.DateOfBirth).Empty().WithMessage("Necessário informar a data de nascimento do aluno.");
+                .Equal(false).WithMessage("Informar o nome do aluno.");
+            RuleFor(x => x.StudentName.Length > 50 ).Equal(false).WithMessage("Nome do aluno excedeu tamanho máximo permitido.");
+            RuleFor(x => x.Email.Length > 20).Equal(false).WithMessage("Email do aluno excedeu tamanho máximo permitido.");
+            RuleFor(x => x.DateOfBirth).NotEmpty().WithMessage("Necessário informar a data de nascimento do aluno.");
             RuleFor(x => x.Email).EmailAddress().WithMessage("Necessário informar um e-mail válido.");
         }
     }

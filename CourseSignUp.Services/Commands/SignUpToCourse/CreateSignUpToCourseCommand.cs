@@ -4,11 +4,15 @@ namespace CourseSignUp.Services.Commands.SignUpToCourse
 {
     public class CreateSignUpToCourseCommand : IRequest<bool>
     {
-        public Domain.Entities.SignUpToCourse SignUpToCourse { private set; get; }
+        public int IdCourse { get; private set; }
 
-        public CreateSignUpToCourseCommand(Domain.Entities.SignUpToCourse signUpToCourse)
+        public int IdStudent { get; private set; }
+
+
+        public CreateSignUpToCourseCommand(int idCourse , int idStudent)
         {
-            SignUpToCourse = signUpToCourse;
+            IdCourse = idCourse;
+            IdStudent = idStudent;
         }
     }
 }

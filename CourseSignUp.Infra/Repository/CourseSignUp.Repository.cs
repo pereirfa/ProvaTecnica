@@ -205,7 +205,7 @@ namespace CourseSignUp.Infra.Repository
         public bool VerifyCourse(Course course)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
-            string queryString = " select count(*) " +
+            string queryString = " select CourseId " +
                                  " from dbo.Course " +
                                  " where CourseName = @Name ";
             int qtdcourse = 0;
@@ -219,7 +219,14 @@ namespace CourseSignUp.Infra.Repository
                     command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = course.CourseName;
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    qtdcourse = reader.GetInt32(0);
+
+                    while (reader.Read())
+                    {
+                        if (reader.GetValue(0) != DBNull.Value)
+                            qtdcourse = reader.GetInt32(0);
+                    }
+                    reader.Close();
+
                     connection.Close();
                 }
                 catch (Exception)

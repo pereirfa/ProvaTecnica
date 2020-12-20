@@ -91,10 +91,9 @@ namespace CourseSignUp.Infra.Repository
         public bool VerifyStudent(Student student) 
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
-            string queryString = " select count(*) " +
+            string queryString = " select StudentId " +
                                  " from dbo.Student " +
-                                 " where Email = @Email " +
-                                 " and StudentName = @Name ";
+                                 " where StudentName = @Name ";
 
             int qtdstudent = 0;
 
@@ -104,11 +103,17 @@ namespace CourseSignUp.Infra.Repository
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@Email", SqlDbType.VarChar, 20).Value = student.Email;
-                    command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = student.StudentName;
+                    command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = student.StudentName.Trim();
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
-                    qtdstudent = reader.GetInt32(0);
+
+                    while (reader.Read())
+                    {
+                      if ( reader.GetValue(0) != DBNull.Value  )
+                        qtdstudent = reader.GetInt32(0);
+                    }
+                    reader.Close();
+
                     connection.Close();
                 }
                 catch (Exception)

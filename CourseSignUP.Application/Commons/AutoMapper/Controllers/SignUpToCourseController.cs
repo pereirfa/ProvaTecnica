@@ -19,6 +19,8 @@ namespace CourseSignUp.Application.Controllers
         private readonly ILogger _Logger;
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
+        private int idCourse;
+        private int idStudent;
 
         /// <summary>
         /// 
@@ -69,16 +71,21 @@ namespace CourseSignUp.Application.Controllers
         }
 
         /// <summary>
-        /// Incluir as matriculas por Id do aluno e curso
+        /// Cadastrar matriculas por IdCourse e IdStudent
+        ///
         /// </summary>
+        /// <param name="IdCourse"> Id Curso  </param>
+        /// <param name="IdStudent"> Id Student  </param>  
+        /// 
         /// <returns>course</returns>
         /// <response code="200">Matricula realizada com sucesso</response>
-        [HttpPost]
-        public ActionResult Post([FromBody] SignUpToCourseModel model)
+        [HttpGet]
+        [Route("{idCourse},{idStudent}")]
+        public ActionResult Create(int IdCourse , int IdStudent )
         {
             try
             {
-                var course = _mediator.Send(new CreateSignUpToCourseCommand(_mapper.Map<SignUpToCourse>(model))).Result;
+                var course = _mediator.Send(new CreateSignUpToCourseCommand(idCourse,idStudent)).Result;
                 return Ok(_mapper.Map<SignUpToCourseModel>(course));
             }
             catch (HttpRequestException ex)

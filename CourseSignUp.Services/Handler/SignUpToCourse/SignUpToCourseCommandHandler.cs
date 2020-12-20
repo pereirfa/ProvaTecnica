@@ -20,7 +20,7 @@ namespace CourseSignUp.Services.Handler.SignUpToCourse
         public Task<bool> Handle(CreateSignUpToCourseCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
-                _SignUPtoCourseRepository.Create(request.SignUpToCourse)
+                _SignUPtoCourseRepository.Create(request.IdCourse , request.IdStudent)
             );
         }
 
