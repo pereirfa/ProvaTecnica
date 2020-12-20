@@ -13,8 +13,6 @@ Prova Tecnica : **Analista Desenvolvedor .NET**.
 
 **Banco de Dados SQL-Server - Cloud Azure**
 
-**Integração Rabbit MQ**
-
 **Api´s REST**
 
 
