@@ -39,11 +39,12 @@ namespace CourseSignUp.Application.Controllers
         /// <summary>
         /// Consultar as matriculas por curso 
         /// </summary>
+        /// <param name="id"> Id Curso  </param>
         /// <returns>course</returns>
-        /// <response code="200">Estatistica consultada com sucesso</response>
+        /// <response code="200">Consulta realizada com sucesso</response>
         [HttpGet]
         [Route("{id}")]
-        public ActionResult Get(int id)
+        public ActionResult Get(int id )
         {
             try
             {
@@ -71,7 +72,7 @@ namespace CourseSignUp.Application.Controllers
         /// Incluir as matriculas por Id do aluno e curso
         /// </summary>
         /// <returns>course</returns>
-        /// <response code="200">Estatistica consultada com sucesso</response>
+        /// <response code="200">Matricula realizada com sucesso</response>
         [HttpPost]
         public ActionResult Post([FromBody] SignUpToCourseModel model)
         {

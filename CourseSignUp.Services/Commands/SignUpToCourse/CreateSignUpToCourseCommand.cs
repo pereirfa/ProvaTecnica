@@ -2,7 +2,7 @@
 
 namespace CourseSignUp.Services.Commands.SignUpToCourse
 {
-    public class CreateSignUpToCourseCommand : IRequest<Domain.Entities.SignUpToCourse>
+    public class CreateSignUpToCourseCommand : IRequest<bool>
     {
         public Domain.Entities.SignUpToCourse SignUpToCourse { private set; get; }
 

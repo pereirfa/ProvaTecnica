@@ -14,5 +14,8 @@ namespace CourseSignUp.Domain.Repository
         bool Create(Course course);
 
         bool Delete(int id);
+
+        bool UpdateNumberStudents(int idCourse);
+
     }
 }

@@ -51,15 +51,16 @@
             <summary>
             Consultar as matriculas por curso 
             </summary>
+            <param name="id"> Id Curso  </param>
             <returns>course</returns>
-            <response code="200">Estatistica consultada com sucesso</response>
+            <response code="200">Consulta realizada com sucesso</response>
         </member>
         <member name="M:CourseSignUp.Application.Controllers.SignUpToCourseController.Post(CourseSignUp.Application.Model.SignUpToCourseModel)">
             <summary>
             Incluir as matriculas por Id do aluno e curso
             </summary>
             <returns>course</returns>
-            <response code="200">Estatistica consultada com sucesso</response>
+            <response code="200">Matricula realizada com sucesso</response>
         </member>
         <member name="M:CourseSignUp.Application.Controllers.StatisticsController.GetAll">
             <summary>

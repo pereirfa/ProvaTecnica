@@ -122,6 +122,11 @@ namespace CourseSignUp.Infra.Repository
               "  INSERT INTO dbo.Course( CourseName, NumberOfStudents, Capacity) " +
                  "VALUES ( @CourseName, @NumberOfStudents, @Capacity) ";
 
+            if ( VerifyCourse(course) )
+            {
+                throw new ArgumentException("Curso já cadastrado");
+            }
+
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
             {
@@ -145,6 +150,30 @@ namespace CourseSignUp.Infra.Repository
 
         }
 
+        public bool UpdateNumberStudents(int idCourse ) 
+        {
+            string connectionString = _configuration.GetConnectionString("ConnectionCourse");
+            string queryString = "UPDATE dbo.COURSE SET NumberOfStudents = NumberOfStudents + 1  Where CourseId = @Id ";
+            using (SqlConnection connection =
+               new SqlConnection(connectionString))
+            {
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+                try
+                {
+                    command.Parameters.Add("@Id", SqlDbType.Int).Value = idCourse;
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                    connection.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+           return true;
+        }
 
         public bool Delete(int id)
         {
@@ -172,6 +201,40 @@ namespace CourseSignUp.Infra.Repository
             return true;
         }
 
-      
+
+        public bool VerifyCourse(Course course)
+        {
+            string connectionString = _configuration.GetConnectionString("ConnectionCourse");
+            string queryString = " select count(*) " +
+                                 " from dbo.Course " +
+                                 " where CourseName = @Name ";
+            int qtdcourse = 0;
+
+            using (SqlConnection connection =
+               new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                try
+                {
+                    command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = course.CourseName;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    qtdcourse = reader.GetInt32(0);
+                    connection.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            if (qtdcourse == 0)
+                return false;
+            else
+                return true;
+        }
+
+
+
     }
 }

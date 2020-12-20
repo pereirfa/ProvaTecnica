@@ -71,7 +71,7 @@ namespace CourseSignUp.Application
             services.AddTransient<IRequestHandler<GetAllCourseQuery, IEnumerable<Course>>, CourseCommandHandler>();
             services.AddTransient<IRequestHandler<DeleteCourseCommand, bool>, CourseCommandHandler>();
 
-            services.AddTransient<IRequestHandler<CreateSignUpToCourseCommand, SignUpToCourse>, SignUpToCourseCommandHandler>();
+            services.AddTransient<IRequestHandler<CreateSignUpToCourseCommand, bool >, SignUpToCourseCommandHandler>();
             services.AddTransient<IRequestHandler<GetByIdSignUpToCourseQuery, SignUpToCourse>, SignUpToCourseCommandHandler>();
 
             services.AddTransient<IRequestHandler<GetAllStatisticsQuery, IEnumerable<Statistics>>, StatisticsCommandHandler>();
@@ -84,6 +84,8 @@ namespace CourseSignUp.Application
 
             services.AddTransient<IValidator<CourseModel>, CourseValidator>();
             services.AddTransient<IValidator<SignUpToCourseModel>, SignUpToCourseValidator>();
+            services.AddTransient<IValidator<StudentModel>, StudentValidator>();
+
 
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CourseValidator>());

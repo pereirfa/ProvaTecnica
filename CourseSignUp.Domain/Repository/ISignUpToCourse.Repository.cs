@@ -4,7 +4,7 @@ namespace CourseSignUp.Domain.Repository
 {
     public interface ISignUpToCourseRepository
     {
-        SignUpToCourse Create(SignUpToCourse courseSignUpToCourse);
+        bool Create(SignUpToCourse courseSignUpToCourse);
 
         SignUpToCourse Get(int id);
     }

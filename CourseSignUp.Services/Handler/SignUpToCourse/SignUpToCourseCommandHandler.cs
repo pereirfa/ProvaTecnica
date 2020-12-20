@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CourseSignUp.Services.Handler.SignUpToCourse
 {
-    public class SignUpToCourseCommandHandler : IRequestHandler<CreateSignUpToCourseCommand, Domain.Entities.SignUpToCourse> ,
+    public class SignUpToCourseCommandHandler : IRequestHandler<CreateSignUpToCourseCommand, bool> ,
                                                 IRequestHandler<GetByIdSignUpToCourseQuery, Domain.Entities.SignUpToCourse>
     {
         private readonly ISignUpToCourseRepository _SignUPtoCourseRepository;
@@ -17,7 +17,7 @@ namespace CourseSignUp.Services.Handler.SignUpToCourse
             _SignUPtoCourseRepository = signUPtoCourseRepository;
         }
 
-        public Task<Domain.Entities.SignUpToCourse> Handle(CreateSignUpToCourseCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(CreateSignUpToCourseCommand request, CancellationToken cancellationToken)
         {
             return Task.FromResult(
                 _SignUPtoCourseRepository.Create(request.SignUpToCourse)

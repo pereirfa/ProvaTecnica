@@ -4,67 +4,128 @@ using System;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.Collections.Generic;
 
 namespace CourseSignUp.Infra.Repository
 {
     public class SignUpToCourseRepository : ISignUpToCourseRepository
     {
         private readonly IConfiguration _configuration;
-        public SignUpToCourseRepository(IConfiguration configuration)
+        private IStudentRepository _StudentRepository;
+        private ICourseSignUpRepository _CourseRepository;
+
+
+        public SignUpToCourseRepository(IConfiguration configuration , IStudentRepository studentRepository , ICourseSignUpRepository courseRepository )
         {
             _configuration = configuration;
+            _StudentRepository = studentRepository;
+            _CourseRepository = courseRepository;
         }
 
-        public SignUpToCourse Get(int id)
+        public IEnumerable<Student> GetIdStudentsByCourse(int id)
         {
+            //Listar todos os alunos do curso
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
-            string queryString = " Select C.CourseName , S.StudentName , S.Email , S.DateOfBirth " +
-                                 " from dbo.SignUPToCourse SU" +
-                                 " INNER JOIN dbo.Student S on SU.StudentId = S.StudentId " +
-                                 " INNER JOIN dbo.Course C on SU.CourseId = C.CourseId " +
-                                 " WHERE SU.CourseId = @Id ";
+            string queryString = " SELECT StudentId " +
+                                 " FROM dbo.SignUPToCourse " +
+                                 " WHERE CourseId = @Id ";
 
-            var signupretorno = new SignUpToCourse();
-            var aluno = new Student();
-
-
+            var students = new List<Student>();
+            var student = new Student();
 
             using (SqlConnection connection =
-               new SqlConnection(connectionString))
+            new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 try
                 {
-                    command.Parameters.Add("@Id", SqlDbType.VarChar, 5).Value = id;
-
                     connection.Open();
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        /*signupretorno. = reader.GetString(0);
-                        aluno.Email = reader.GetString(1);
-                        aluno.Name = reader.GetString(2);
-                        aluno.DateOfBirth = reader.GetDateTime(3);
-                        signupretorno.Student = aluno;
-                        */
-                    };
+                        student = _StudentRepository.Get(reader.GetInt32(0)) ;
+
+                        if (student.StudentId == 0)
+                        {
+                            throw new ArgumentException("Nenhum aluno encontrado para o curso");
+                        }
+                        else
+                        {
+                            students.Add(new Student()
+                            {
+                                StudentId = student.StudentId,
+                                DateOfBirth = student.DateOfBirth,
+                                Email = student.Email,
+                                StudentName = student.StudentName
+                            });
+                        }   
+                    }
                     reader.Close();
                 }
                 catch (Exception)
                 {
                     throw;
                 }
+
             }
+            return students;   
+        } 
+
+        public SignUpToCourse Get(int id )
+        {
+            var signupretorno = new SignUpToCourse();
+            var course = new Course();
+            course = _CourseRepository.Get(id);
+
+            if (course.CourseId == 0)
+            {
+                throw new ArgumentException("Curso não encontrado");
+            }
+            else 
+            {
+               signupretorno.Course = new Course { CourseId = course.CourseId, Capacity = course.Capacity, CourseName = course.CourseName, NumberOfStudents = course.NumberOfStudents };
+               var alumns = GetIdStudentsByCourse(id);
+
+               foreach ( Student item in alumns)
+               {
+                  signupretorno.Student = new Student { StudentId = item.StudentId, 
+                                                        DateOfBirth = item.DateOfBirth, 
+                                                        Email = item.Email, 
+                                                        StudentName = item.StudentName };
+               }
+            }
+          
             return signupretorno;
         }
 
-        public SignUpToCourse Create(SignUpToCourse courseSignUpToCourse)
+        public bool Create(SignUpToCourse courseSignUpToCourse)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
             var signupretorno = new SignUpToCourse();
+            var course = new Course();
+            var student = new Student();
+            
             string queryString =
               "  INSERT INTO dbo.SignUPToCourse(CourseId, StudentId) " +
                 "VALUES(@CourseId, @StudentId)";
+
+            course = _CourseRepository.Get(courseSignUpToCourse.CourseId);
+
+            if (course.CheckCapacity())
+            {
+                throw new ArgumentException("Capacidade excedida curso : " + course.CourseName);
+            }
+
+            if (course.CourseId == 0)
+            {
+                throw new ArgumentException("Curso não encontrado");
+            }
+
+            student = _StudentRepository.Get(courseSignUpToCourse.StudentId);
+            if (course.CourseId == 0)
+            {
+                throw new ArgumentException("Aluno não encontrado");
+            }
 
             using (SqlConnection connection =
              new SqlConnection(connectionString))
@@ -77,14 +138,14 @@ namespace CourseSignUp.Infra.Repository
                     connection.Open();
                     command.ExecuteNonQuery();
                     connection.Close();
-                    signupretorno = Get(courseSignUpToCourse.CourseId);
+                    _CourseRepository.UpdateNumberStudents(courseSignUpToCourse.CourseId);
                 }
                 catch (Exception )
                 {
                     throw;
                 }
             }
-            return signupretorno; 
+            return true; 
         }
     }
 }

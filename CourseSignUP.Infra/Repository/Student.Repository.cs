@@ -88,12 +88,52 @@ namespace CourseSignUp.Infra.Repository
             return students;
         }
 
+        public bool VerifyStudent(Student student) 
+        {
+            string connectionString = _configuration.GetConnectionString("ConnectionCourse");
+            string queryString = " select count(*) " +
+                                 " from dbo.Student " +
+                                 " where Email = @Email " +
+                                 " and StudentName = @Name ";
+
+            int qtdstudent = 0;
+
+            using (SqlConnection connection =
+               new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                try
+                {
+                    command.Parameters.Add("@Email", SqlDbType.VarChar, 20).Value = student.Email;
+                    command.Parameters.Add("@Name", SqlDbType.VarChar, 50).Value = student.StudentName;
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    qtdstudent = reader.GetInt32(0);
+                    connection.Close();
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            if (qtdstudent == 0)
+                return false;
+            else
+                return true;  
+        }
+
         public bool Create(Student student)
         {
             string connectionString = _configuration.GetConnectionString("ConnectionCourse");
             string queryString =
               "  INSERT into dbo.Student (  Email ,StudentName ,DateOfBirth ) " +
               "  VALUES ( @Email , @Name ,  @Data ) ";
+
+            if( VerifyStudent(student) ) 
+            {
+               throw new ArgumentException("Aluno já cadastrado");
+            }
 
             using (SqlConnection connection =
                 new SqlConnection(connectionString))
@@ -116,7 +156,6 @@ namespace CourseSignUp.Infra.Repository
 
             return true;
         }
-
 
         public bool Delete(int id)
         {
@@ -143,7 +182,6 @@ namespace CourseSignUp.Infra.Repository
 
             return true;
         }
-
 
     }
 }
